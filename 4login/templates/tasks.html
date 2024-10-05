@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tasks</h1>
+
+<ul>
+    {% for task in tasks %}
+    <li>
+        {{ task.title }}
+        <span>{{ task.description }}</span>
+        <span>{{ task.due_date }}</span>
+        <a href="{{ url_for('delete_task', task_id=task.id) }}">Delete</a>
+        <a href="{{ url_for('mark_task_as_completed', task_id=task.id) }}">Mark as Completed</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<form method="post" action="{{ url_for('add_task') }}">
+    <label for="title">Titulo:</label>
+    <input type="text" id="title" name="title"><br><br>
+
+    <label for="description">Descripcion:</label>
+    <input type="text" id="description" name="description"><br><br>
+
+    <label for="due_date">fecha:</label>
+    <input type="date" id="due_date" name="due_date"><br><br>
+
+    <input type="submit" value="Add Task">
+</form>
+{% endblock %}
+
